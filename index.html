@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<title>A1戶客變 討論版（手機）</title>
+<style>
+  :root{
+    --paper:#F6F8F7; --panel:#FFF; --ink:#1C2B33; --soft:#4A5B62;
+    --accent:#14586A; --accent-soft:#E3EEF0;
+    --fixed:#A8422F; --fixed-soft:#F7E9E5;
+    --flex:#3D7A52; --flex-soft:#E7F1EA;
+    --new:#A8731E; --new-soft:#F6EEDD;
+    --line:#CBD5D2; --mono:"Consolas",monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;
+    font-size:17px;line-height:1.8;-webkit-text-size-adjust:100%}
+  .wrap{max-width:640px;margin:0 auto;padding:20px 16px 80px}
+  .eyebrow{font-size:12px;letter-spacing:.16em;color:var(--accent);font-weight:700}
+  h1{font-family:"Noto Serif TC","PMingLiU",serif;font-size:26px;line-height:1.4;margin:6px 0 4px;font-weight:900;text-wrap:balance}
+  .date{font-size:13px;color:var(--soft);margin-bottom:14px}
+  .keyfind{background:var(--accent);color:#fff;border-radius:10px;padding:16px 18px;font-size:16px;line-height:1.75;margin:14px 0 22px}
+  .keyfind b{color:#FFD98A}
+  h2{font-family:"Noto Serif TC","PMingLiU",serif;font-size:21px;margin:34px 0 10px;font-weight:900}
+  h2 .no{color:var(--accent);font-family:var(--mono);font-size:16px;margin-right:8px}
+  .planbox{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px;margin:12px 0 4px}
+  figcaption{font-size:12.5px;color:var(--soft);line-height:1.6;margin:6px 2px 0}
+  figure{margin:14px 0}
+  svg text{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;margin:14px 0}
+  .card.a{border-top:6px solid var(--accent)}
+  .card.b{border-top:6px solid var(--new)}
+  .card h3{margin:0 0 4px;font-size:19px;font-family:"Noto Serif TC","PMingLiU",serif}
+  .card .tagline{font-size:14px;color:var(--soft);margin-bottom:10px}
+  .card ul{margin:8px 0;padding-left:20px;font-size:15.5px}
+  .card li{margin-bottom:6px}
+  .pill{display:inline-block;font-size:12px;font-weight:700;border-radius:20px;padding:2px 12px;margin-left:6px;vertical-align:3px}
+  .pill.risk{background:var(--fixed-soft);color:var(--fixed)}
+  .pill.safe{background:var(--flex-soft);color:var(--flex)}
+  .pc{display:grid;gap:10px;margin-top:10px}
+  .pc div{border-radius:8px;padding:12px 14px;font-size:14.5px;line-height:1.7}
+  .pc .pro{background:var(--flex-soft)}
+  .pc .con{background:var(--fixed-soft)}
+  .pc b{display:block;margin-bottom:4px}
+  details{background:var(--panel);border:1px solid var(--line);border-radius:10px;margin:10px 0;overflow:hidden}
+  summary{padding:14px 16px;font-weight:700;font-size:16px;cursor:pointer;list-style:none;position:relative}
+  summary::after{content:"＋";position:absolute;right:16px;top:12px;color:var(--accent);font-size:18px}
+  details[open] summary::after{content:"－"}
+  details .inner{padding:0 16px 16px;font-size:15px}
+  details table{border-collapse:collapse;width:100%;font-size:13.5px}
+  details th{background:var(--accent-soft);color:var(--accent);text-align:left;padding:8px 10px;font-size:12px;white-space:nowrap}
+  details td{padding:8px 10px;border-bottom:1px solid #E4EAE8;vertical-align:top}
+  .tbox{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:10px 0}
+  .ask{background:var(--new-soft);border-left:5px solid var(--new);border-radius:0 10px 10px 0;padding:16px 18px;margin:16px 0}
+  .ask h3{margin:0 0 10px;font-size:17px}
+  .ask ol{margin:0;padding-left:22px;font-size:16px}
+  .ask li{margin-bottom:10px}
+  .vs{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:stretch;font-size:14px;margin:10px 0}
+  .vs .cell{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 12px;line-height:1.6}
+  .vs .mid{display:flex;align-items:center;color:var(--soft);font-size:12px}
+  .vhead{font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--soft);text-align:center;margin-top:14px}
+  .vhead.a{color:var(--accent)} .vhead.b{color:var(--new)}
+  footer{margin-top:44px;font-size:12.5px;color:var(--soft);border-top:1px solid var(--line);padding-top:14px;line-height:1.7}
+  .num{font-family:var(--mono)}
+</style>
+
+<div class="wrap">
+<div class="eyebrow">原森 TWIN TOWERS · A1戶 · 客變討論版</div>
+<h1>四房三衛＋儲物<br>兩個方案，等你們一起決定</h1>
+<div class="date">2026-07-06｜圖面判讀完成｜衛浴廚房全部不動</div>
+
+<div class="keyfind">
+  <b>先說好消息：</b>A1 原本就是<b>四房二廳三衛</b>——爸媽、兩個哥哥、妹妹每人一間房都夠，<b>不必犧牲客餐廳去隔房間</b>。要討論的只剩兩件事：<b>儲物空間怎麼做</b>、<b>女兒房放哪裡</b>。
+</div>
+
+<h2><span class="no">01</span>家裡長什麼樣（原始格局）</h2>
+<figure>
+  <div class="planbox">
+  <svg viewBox="-15 -195 1345 1265" width="100%" role="img" aria-label="A1戶原始格局示意圖">
+    <rect x="-15" y="-195" width="1345" height="1265" fill="#FDFDFC"/>
+    <rect x="505" y="-170" width="236" height="170" fill="#EFF3F1" stroke="#A8422F" stroke-width="4"/>
+    <text x="623" y="-70" font-size="34" text-anchor="middle" fill="#4A5B62">工作陽台</text>
+    <rect x="0" y="45" width="519.5" height="840" fill="none" stroke="#1C2B33" stroke-width="8"/>
+    <rect x="519.5" y="0" width="789" height="885" fill="none" stroke="#1C2B33" stroke-width="8"/>
+    <rect x="0" y="45" width="368" height="311" fill="#E3EEF0" stroke="#14586A" stroke-width="4"/>
+    <text x="184" y="190" font-size="40" text-anchor="middle" fill="#14586A" font-weight="bold">西北房</text>
+    <text x="184" y="240" font-size="28" text-anchor="middle" fill="#4A5B62">約3.6×3.0m</text>
+    <rect x="368" y="120" width="151.5" height="180" fill="#F7E9E5" stroke="#A8422F" stroke-width="4"/>
+    <text x="444" y="205" font-size="30" text-anchor="middle" fill="#A8422F">客浴A</text>
+    <rect x="519.5" y="0" width="221.5" height="300" fill="#F7E9E5" stroke="#A8422F" stroke-width="4"/>
+    <text x="630" y="160" font-size="36" text-anchor="middle" fill="#A8422F">廚房</text>
+    <rect x="741" y="0" width="45" height="190" fill="#A8422F" opacity=".75"/>
+    <rect x="786" y="0" width="321" height="200" fill="#F7E9E5" stroke="#A8422F" stroke-width="4"/>
+    <text x="946" y="115" font-size="32" text-anchor="middle" fill="#A8422F">客浴B</text>
+    <rect x="1107" y="0" width="201.5" height="200" fill="#EFF3F1" stroke="#4A5B62" stroke-width="3" stroke-dasharray="10 6"/>
+    <text x="1207" y="115" font-size="32" text-anchor="middle" fill="#4A5B62">玄關</text>
+    <rect x="0" y="356" width="255" height="229" fill="#F7E9E5" stroke="#A8422F" stroke-width="4"/>
+    <text x="127" y="485" font-size="32" text-anchor="middle" fill="#A8422F">主浴</text>
+    <rect x="255" y="356" width="486" height="104" fill="#F1F4F2"/>
+    <text x="500" y="422" font-size="26" text-anchor="middle" fill="#8A9A94">走道</text>
+    <rect x="0" y="585" width="379.5" height="300" fill="#E3EEF0" stroke="#14586A" stroke-width="4"/>
+    <text x="190" y="730" font-size="40" text-anchor="middle" fill="#14586A" font-weight="bold">主臥</text>
+    <text x="190" y="778" font-size="28" text-anchor="middle" fill="#4A5B62">約3.7×3.4m</text>
+    <rect x="379.5" y="460" width="300" height="425" fill="#E3EEF0" stroke="#14586A" stroke-width="4"/>
+    <text x="529" y="660" font-size="38" text-anchor="middle" fill="#14586A" font-weight="bold">房2</text>
+    <text x="529" y="708" font-size="28" text-anchor="middle" fill="#4A5B62">2.9×3.4m</text>
+    <rect x="679.5" y="460" width="285" height="425" fill="#E3EEF0" stroke="#14586A" stroke-width="4"/>
+    <text x="822" y="660" font-size="38" text-anchor="middle" fill="#14586A" font-weight="bold">房3</text>
+    <text x="822" y="708" font-size="28" text-anchor="middle" fill="#4A5B62">2.7×3.4m</text>
+    <text x="1030" y="335" font-size="38" text-anchor="middle" fill="#1C2B33" font-weight="bold">餐廳</text>
+    <text x="1135" y="655" font-size="38" text-anchor="middle" fill="#1C2B33" font-weight="bold">客廳</text>
+    <rect x="947" y="885" width="361.5" height="150" fill="#EFF3F1" stroke="#A8422F" stroke-width="4"/>
+    <text x="1128" y="978" font-size="30" text-anchor="middle" fill="#4A5B62">主陽台</text>
+  </svg>
+  </div>
+  <figcaption>紅框＝不能動（衛浴、廚房、陽台、管道間）。藍框＝四間房。尺寸為推估值，以建商圖為準。</figcaption>
+</figure>
+<ul style="font-size:15.5px;padding-left:20px">
+  <li>三間衛浴分工：<b>主浴</b>（有浴缸）爸媽用；<b>客浴A</b>在西側；<b>客浴B</b>（乾濕分離＋外面就有洗手台）在玄關旁——早上尖峰三線同時進行。</li>
+  <li>四間房都有對外窗，沒有暗房。</li>
+</ul>
+
+<h2><span class="no">02</span>方案A：做一間儲藏室</h2>
+<div class="card a">
+  <h3>獨立儲藏室優先<span class="pill risk">需建商審查</span></h3>
+  <div class="tagline">在餐廳角落（廚房出口旁）隔一間約 3㎡ 的儲藏室</div>
+  <figure>
+    <div class="planbox">
+    <svg viewBox="700 150 640 340" width="100%" role="img" aria-label="方案A儲藏室位置放大圖">
+      <rect x="700" y="150" width="640" height="340" fill="#FDFDFC"/>
+      <rect x="741" y="150" width="45" height="40" fill="#A8422F" opacity=".75"/>
+      <rect x="786" y="150" width="321" height="50" fill="#F7E9E5" stroke="#A8422F" stroke-width="3"/>
+      <text x="946" y="185" font-size="24" text-anchor="middle" fill="#A8422F">客浴B</text>
+      <rect x="1107" y="150" width="201.5" height="50" fill="#EFF3F1" stroke="#4A5B62" stroke-width="2" stroke-dasharray="8 5"/>
+      <text x="1207" y="185" font-size="24" text-anchor="middle" fill="#4A5B62">玄關</text>
+      <rect x="745" y="210" width="145" height="215" fill="#F6EEDD" stroke="#A8731E" stroke-width="6"/>
+      <text x="817" y="300" font-size="28" text-anchor="middle" fill="#A8731E" font-weight="bold">儲藏室</text>
+      <text x="817" y="336" font-size="22" text-anchor="middle" fill="#A8731E">1.4×2.15m</text>
+      <text x="817" y="368" font-size="20" text-anchor="middle" fill="#A8731E">約3.0㎡</text>
+      <rect x="1266" y="205" width="42" height="255" fill="#A8731E" opacity=".85"/>
+      <text x="1290" y="335" font-size="18" text-anchor="middle" fill="#fff" writing-mode="tb">玄關高櫃</text>
+      <text x="1060" y="330" font-size="28" text-anchor="middle" fill="#1C2B33" font-weight="bold">餐廳</text>
+      <text x="1060" y="366" font-size="20" text-anchor="middle" fill="#8A9A94">餐桌區往南移一點</text>
+    </svg>
+    </div>
+    <figcaption>放大圖：儲藏室緊貼管道間與客浴B南牆，門朝餐廳開（拉門）。</figcaption>
+  </figure>
+  <ul>
+    <li>28吋行李箱×3、吸塵器、電風扇、季節寢具、大型玩具<b>一室收齊、隨手可拿</b></li>
+    <li>加玄關頂天鞋櫃（留弱電箱檢修門）</li>
+  </ul>
+  <div class="pc">
+    <div class="pro"><b>👍 好處</b>大型雜物完全看不見；在玄關→餐廳→廚房的動線節點上，拿東西最順。</div>
+    <div class="con"><b>👀 代價</b>餐廳北側視覺變窄、餐區少約3㎡；多一道隔間要建築師審查＋費用；<b>裡面的消防灑水頭涵蓋要先問建商可不可以</b>（這是本案唯一風險點）。</div>
+  </div>
+</div>
+
+<h2><span class="no">03</span>方案B：不隔牆，餐桌當主角</h2>
+<div class="card b">
+  <h3>大客餐廳＋整合收納<span class="pill safe">風險最低</span></h3>
+  <div class="tagline">一道牆都不加。回應「全家都在餐桌吃飯＋寫作業、很少看電視」的真實生活</div>
+  <ul>
+    <li><b>240cm 家庭大桌</b>放在採光中心：吃飯、寫作業、爸媽用筆電都在這</li>
+    <li>客廳退為輕沙發閱讀區（電視線先留著，要不要掛以後再說）</li>
+    <li>收納分四處吸收：客浴B外牆<b>整排高櫃</b>（餐櫃＋電器＋雜物）、玄關高櫃、走道底<b>家政櫃</b>（清潔用品）、各房頂天衣櫃＋床下</li>
+    <li>行李箱收主臥衣櫃上層＋床下</li>
+  </ul>
+  <div class="pc">
+    <div class="pro"><b>👍 好處</b>公共區最大、進門景深最漂亮；客變只動插座燈位，<b>幾乎零審查風險</b>；櫃體交屋後慢慢做，彈性大。</div>
+    <div class="con"><b>👀 代價</b>沒有獨立儲藏室，大型物分散收，拿行李箱要開衣櫃上層。</div>
+  </div>
+</div>
+
+<h2><span class="no">04</span>兩案快速比一比</h2>
+<div class="vhead">A 儲藏室 ⬥ B 大餐桌</div>
+<div class="vs">
+  <div class="cell">◎ 收納集中好拿</div><div class="mid">收納</div><div class="cell">○ 量夠但分散</div>
+  <div class="cell">○ 餐廳略縮</div><div class="mid">開闊感</div><div class="cell">◎ 最大最亮</div>
+  <div class="cell">○ 要審查＋隔間費</div><div class="mid">客變風險</div><div class="cell">◎ 最低</div>
+  <div class="cell">隔間費用進客變帳</div><div class="mid">花費時點</div><div class="cell">櫃體費用留到交屋後</div>
+</div>
+<p style="font-size:15px;color:var(--soft)">💡 也可以<b>混搭</b>：用B的佈局＋縮小版儲藏室（約1.2×1.8m），前提是建商確認消防OK。</p>
+
+<div class="ask">
+  <h3>📌 這次要一起決定的三件事</h3>
+  <ol>
+    <li><b>方案 A / B / 混搭</b>，選哪個？</li>
+    <li><b>女兒房</b>放「西北房」（大間、離哥哥們遠、隱私好，但鄰廚房和冷氣主機）還是「房2」（南向、離爸媽近）？</li>
+    <li>儲藏室如果要做，同意先由建商確認<b>消防灑水</b>可行性再定案？</li>
+  </ol>
+</div>
+
+<details>
+  <summary>各房間放得下什麼（家具檢核）</summary>
+  <div class="inner"><div class="tbox"><table>
+    <tr><th>房間</th><th>約略淨尺寸</th><th>家具</th></tr>
+    <tr><td>主臥</td><td class="num">3.7×3.4m</td><td>雙人床＋240cm衣櫃＋梳妝台</td></tr>
+    <tr><td>西北房</td><td class="num">3.6×3.0m</td><td>單人床＋書桌＋210cm衣櫃</td></tr>
+    <tr><td>房2</td><td class="num">2.9×3.4m</td><td>單人床＋書桌＋180cm衣櫃</td></tr>
+    <tr><td>房3</td><td class="num">2.7×3.4m</td><td>單人床＋書桌＋150cm衣櫃（最緊湊）</td></tr>
+  </table></div>
+  尺寸為圖面比例推估（±10cm），建模前會用建商 DWG 原檔校正。</div>
+</details>
+
+<details>
+  <summary>客變規則重點（為什麼衛浴廚房都不動）</summary>
+  <div class="inner">
+    <ul style="padding-left:20px">
+      <li>浴廁、廚房的<b>範圍和設備不能增設、移位</b>；管道間、消防灑水、外牆門窗、玄關門、冷氣主機位置都不能動</li>
+      <li>能動的：室內輕隔間（要建築師審查）、門框門扇、插座／開關／燈位／網路點</li>
+      <li><b>客變只能申請一次</b>，所有插座燈位要一次提齊；圖要用建商的格式畫</li>
+      <li>兩個方案都<b>完全不動水路</b>，就是為了把風險降到最低</li>
+    </ul>
+  </div>
+</details>
+
+<details>
+  <summary>接下來的流程</summary>
+  <div class="inner">
+    <ol style="padding-left:20px">
+      <li>家庭會議定案（就是上面三件事）✅</li>
+      <li>出正式推薦方案報告（第三階段）</li>
+      <li>用建商 DWG 原檔校正所有尺寸</li>
+      <li>建 3D 模型（樓高3.3m）＋客變前後對照圖＋交建商的客變清單</li>
+    </ol>
+  </div>
+</details>
+
+<footer>
+原森 TWIN TOWERS A1戶（11–20F）客變規劃討論版｜依建商平面圖與客變辦法編製，標示尺寸為推估值，一切以建商正式圖面與審查結果為準。完整技術版報告：<a href="full.html" style="color:#14586A;font-weight:700">點此開啟</a>。
+</footer>
+</div>
+
+</body>
+</html>

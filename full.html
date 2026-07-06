@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<title>原森TWIN TOWERS A1戶 客變規劃報告（第一、二階段）</title>
+<style>
+  :root{
+    --paper:#F6F8F7;
+    --panel:#FFFFFF;
+    --ink:#1C2B33;
+    --ink-soft:#4A5B62;
+    --accent:#14586A;      /* 深青：結構與品牌 */
+    --accent-soft:#E3EEF0;
+    --fixed:#A8422F;       /* 磚紅：不可變更 */
+    --fixed-soft:#F7E9E5;
+    --flex:#3D7A52;        /* 綠：可調整 */
+    --flex-soft:#E7F1EA;
+    --new:#A8731E;         /* 金褐：本案新增/提案 */
+    --new-soft:#F6EEDD;
+    --line:#CBD5D2;
+    --mono:"Consolas","Courier New",monospace;
+  }
+  *{box-sizing:border-box}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Sans TC","Microsoft JhengHei","PingFang TC",sans-serif;
+    line-height:1.75;
+    margin:0;
+    font-size:16px;
+  }
+  .wrap{max-width:980px;margin:0 auto;padding:48px 24px 96px}
+  header.hero{border-bottom:3px solid var(--accent);padding-bottom:28px;margin-bottom:40px}
+  .eyebrow{
+    font-size:13px;letter-spacing:.18em;color:var(--accent);
+    text-transform:uppercase;font-weight:700;margin-bottom:10px;
+  }
+  h1{
+    font-family:"Noto Serif TC","PMingLiU",serif;
+    font-size:34px;line-height:1.35;margin:0 0 14px;text-wrap:balance;font-weight:900;
+  }
+  .meta{display:flex;flex-wrap:wrap;gap:8px 24px;font-size:13.5px;color:var(--ink-soft)}
+  .meta b{color:var(--ink);font-weight:600}
+  .keyfind{
+    margin:26px 0 0;background:var(--accent);color:#fff;border-radius:6px;
+    padding:18px 22px;font-size:16.5px;line-height:1.7;
+  }
+  .keyfind strong{color:#FFD98A}
+  h2{
+    font-family:"Noto Serif TC","PMingLiU",serif;font-weight:900;
+    font-size:25px;margin:64px 0 6px;line-height:1.4;text-wrap:balance;
+  }
+  h2 .no{color:var(--accent);font-family:var(--mono);font-size:20px;margin-right:10px}
+  h3{font-size:18.5px;margin:36px 0 12px;font-weight:700}
+  h3 .tag{font-size:12px;vertical-align:2px;margin-left:8px}
+  .sub{color:var(--ink-soft);font-size:14.5px;margin:0 0 20px}
+  p{max-width:72ch}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:22px 24px;margin:18px 0}
+  table{border-collapse:collapse;width:100%;font-size:14.5px;background:var(--panel)}
+  .tablebox{overflow-x:auto;border:1px solid var(--line);border-radius:8px;margin:16px 0}
+  th{
+    text-align:left;background:var(--accent-soft);color:var(--accent);
+    font-size:13px;letter-spacing:.06em;padding:10px 14px;border-bottom:1px solid var(--line);
+    white-space:nowrap;
+  }
+  td{padding:10px 14px;border-bottom:1px solid #E4EAE8;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.num,.dim{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .tag{
+    display:inline-block;font-size:12px;font-weight:700;border-radius:3px;
+    padding:1px 8px;letter-spacing:.05em;white-space:nowrap;
+  }
+  .tag.fixed{background:var(--fixed-soft);color:var(--fixed)}
+  .tag.flex{background:var(--flex-soft);color:var(--flex)}
+  .tag.new{background:var(--new-soft);color:var(--new)}
+  .tag.assume{background:#EEF0EE;color:var(--ink-soft)}
+  .cols2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:760px){.cols2{grid-template-columns:1fr}}
+  .rulecard{border-radius:8px;padding:18px 22px}
+  .rulecard.fixed{background:var(--fixed-soft);border:1px solid #E0BFB6}
+  .rulecard.flex{background:var(--flex-soft);border:1px solid #BDD8C6}
+  .rulecard h4{margin:0 0 10px;font-size:16px}
+  .rulecard.fixed h4{color:var(--fixed)}
+  .rulecard.flex h4{color:var(--flex)}
+  .rulecard ol{margin:0;padding-left:22px;font-size:14.5px}
+  .rulecard li{margin-bottom:6px}
+  figure{margin:22px 0}
+  figure .planbox{
+    background:var(--panel);border:1px solid var(--line);border-radius:8px;
+    padding:18px;overflow-x:auto;
+  }
+  figcaption{font-size:13px;color:var(--ink-soft);margin-top:8px;line-height:1.6}
+  svg text{font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;color:var(--ink-soft);margin-top:10px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .sw{width:14px;height:14px;border-radius:3px;display:inline-block;border:1px solid rgba(0,0,0,.15)}
+  ol.assume{padding-left:24px;font-size:15px}
+  ol.assume li{margin-bottom:10px}
+  .scheme{border:1px solid var(--line);border-left:5px solid var(--accent);background:var(--panel);border-radius:8px;padding:26px 28px;margin:26px 0}
+  .scheme.b{border-left-color:var(--new)}
+  .scheme h3{margin-top:0;font-family:"Noto Serif TC","PMingLiU",serif;font-size:21px}
+  .scheme h4{font-size:15.5px;margin:24px 0 8px;color:var(--accent)}
+  .scheme.b h4{color:var(--new)}
+  .scheme ul,.scheme ol{margin:6px 0;padding-left:22px;font-size:15px}
+  .scheme li{margin-bottom:5px}
+  .procon{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:10px}
+  @media(max-width:760px){.procon{grid-template-columns:1fr}}
+  .procon div{border-radius:6px;padding:12px 16px;font-size:14.5px}
+  .procon .pro{background:var(--flex-soft)}
+  .procon .con{background:var(--fixed-soft)}
+  .procon b{display:block;margin-bottom:6px}
+  .checklist{counter-reset:ck;list-style:none;padding-left:0;font-size:15px}
+  .checklist li{
+    counter-increment:ck;position:relative;padding:12px 16px 12px 56px;
+    background:var(--panel);border:1px solid var(--line);border-radius:6px;margin-bottom:10px;
+  }
+  .checklist li::before{
+    content:counter(ck,decimal-leading-zero);
+    position:absolute;left:16px;top:12px;
+    font-family:var(--mono);font-weight:700;color:var(--accent);font-size:15px;
+  }
+  .note{
+    background:var(--new-soft);border-left:4px solid var(--new);
+    padding:14px 18px;border-radius:0 6px 6px 0;font-size:14.5px;margin:18px 0;
+  }
+  footer{margin-top:72px;padding-top:20px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-soft)}
+</style>
+
+<div class="wrap">
+<header class="hero">
+  <div class="eyebrow">原森 TWIN TOWERS · A1戶（11～20F）· 預售屋客變規劃</div>
+  <h1>四房二廳三衛＋儲物空間<br>客變規劃報告：第一、二階段</h1>
+  <div class="meta">
+    <span><b>委託目標</b>｜五口之家（夫妻＋2男1女）長期居住</span>
+    <span><b>報告日期</b>｜2026-07-05</span>
+    <span><b>圖面基準</b>｜11~20F-A1.pdf（電氣＋給排水）</span>
+    <span><b>階段</b>｜①圖面判讀 ＋ ②格局方案（3D 建模待方案確認後執行）</span>
+  </div>
+  <div class="keyfind">
+    <strong>關鍵發現：</strong>A1 戶原始格局<strong>已經是「四房二廳三衛」</strong>（西北房、主臥、南向兩房＋主浴、客浴×2）。
+    因此本案<strong>不需要「隔出第四房」</strong>，規劃重心轉為：①房間分配與孩子成長動線、②創造儲物空間、③客餐廳型態優化（是否以大餐桌為家庭核心）——三者都能在客變規則內以最小變更達成，可執行性高。
+  </div>
+</header>
+
+<!-- ============ 第一階段 ============ -->
+<h2><span class="no">01</span>第一階段：圖面判讀與限制盤點</h2>
+
+<h3>1.1 附件盤點與判讀狀態</h3>
+<div class="tablebox"><table>
+<tr><th>附件</th><th>內容判讀</th><th>狀態</th></tr>
+<tr><td>11~20F-A1-K.dwg</td><td>AutoCAD 2010 格式（AC1024）原始配置圖</td><td><span class="tag assume">未解析</span> 本機無 DWG 轉檔工具，暫以 PDF 為基準；<b>建模前必須以 DWG 校核尺寸（DWG 優先原則）</b></td></tr>
+<tr><td>11~20F-A1.pdf</td><td>第1頁：電氣／弱電／消防點位配置（含圖例）<br>第2頁：給排水／設備出水配置（含圖例）</td><td><span class="tag flex">已判讀</span></td></tr>
+<tr><td>11~20F-A1（模型）.pdf</td><td>機電綜合疊圖，設備點位編號 ①～⑲</td><td><span class="tag flex">已判讀</span></td></tr>
+<tr><td>客變辦法與同意書.pdf</td><td>23 項不得變更＋9 項可變更、程序規定（一次為限、書面申請、依建商圖例繪製）</td><td><span class="tag flex">已消化</span>，硬性條件全數納入 1.3 節</td></tr>
+<tr><td>衛浴與廚房樣式（9 張照片）</td><td>一字型白色廚具＋黑色斜背式排油煙機；衛浴為灰色石紋磚、淋浴＋免治馬桶（實品屋參考）</td><td><span class="tag flex">已判讀</span>，供 3D 模型材質與風格參考</td></tr>
+</table></div>
+
+<h3>1.2 原始格局判讀<span class="tag assume">尺寸標註值為圖面實載，室內淨尺寸為比例推估 ±10cm</span></h3>
+<p>圖面標註總寬 <span class="dim">519.5＋221.5＋567.5＝1308.5cm</span>、總深 <span class="dim">885cm</span>（單位：公分）。玄關位於<b>東北角</b>（由梯廳進入），北側依序為玄關、客浴B（乾濕分離＋外檯面洗手台）、管道間、廚房（縱向一字型）與工作陽台；西北為一間臥室；西側中段為主浴（含浴缸）；南向為主臥＋兩間次臥，皆面南採光；東側為開放客餐廳，客廳臨主陽台（約 <span class="dim">3.4m×1.5m</span>）。冷氣室外機平台位於西北房北側外牆（不可變更）。</p>
+
+<figure>
+  <div class="planbox">
+  <svg viewBox="-15 -195 1345 1265" width="100%" role="img" aria-label="A1戶原始格局示意圖">
+    <!-- 底 -->
+    <rect x="-15" y="-195" width="1345" height="1265" fill="#FDFDFC"/>
+    <!-- 工作陽台 -->
+    <rect x="505" y="-170" width="236" height="170" fill="#EFF3F1" stroke="#A8422F" stroke-width="4"/>
+    <text x="623" y="-80" font-size="30" text-anchor="middle" fill="#4A5B62">工作陽台</text>
+    <text x="623" y="-45" font-size="22" text-anchor="middle" fill="#8A9A94">洗衣機・熱水器</text>
+    <!-- 外框 -->
+    <rect x="0" y="45" width="519.5" height="840" fill="none" stroke="#1C2B33" stroke-width="7"/>
+    <rect x="519.5" y="0" width="789" height="885" fill="none" stroke="#1C2B33" stroke-width="7"/>
+    <!-- 西北房 -->
+    <rect x="0" y="45" width="368" height="311" fill="#E3EEF0" stroke="#14586A" stroke-width="3"/>
+    <text x="184" y="185" font-size="32" text-anchor="middle" fill="#14586A" font-weight="bold">西北房</text>
+    <text x="184" y="225" font-size="22" text-anchor="middle" fill="#4A5B62">約 3.55×2.95m*</text>
+    <text x="184" y="260" font-size="20" text-anchor="middle" fill="#8A9A94">西向窗｜北外側=冷氣平台</text>
+    <!-- 客浴A -->
+    <rect x="368" y="120" width="151.5" height="180" fill="#F7E9E5" stroke="#A8422F" stroke-width="4"/>
+    <text x="444" y="200" font-size="26" text-anchor="middle" fill="#A8422F" font-weight="bold">客浴A</text>
+    <text x="444" y="232" font-size="19" text-anchor="middle" fill="#A8422F">淋浴三件式</text>
+    <!-- 廚房 -->
+    <rect x="519.5" y="0" width="221.5" height="300" fill="#F7E9E5" stroke="#A8422F" stroke-width="4"/>
+    <text x="630" y="140" font-size="30" text-anchor="middle" fill="#A8422F" font-weight="bold">廚房</text>
+    <text x="630" y="175" font-size="20" text-anchor="middle" fill="#A8422F">一字型・南側開口</text>
+    <!-- 管道間 -->
+    <rect x="741" y="0" width="45" height="190" fill="#A8422F" opacity=".75"/>
+    <text x="763" y="105" font-size="17" text-anchor="middle" fill="#fff" writing-mode="tb">管道間</text>
+    <!-- 客浴B -->
+    <rect x="786" y="0" width="321" height="200" fill="#F7E9E5" stroke="#A8422F" stroke-width="4"/>
+    <text x="946" y="90" font-size="26" text-anchor="middle" fill="#A8422F" font-weight="bold">客浴B</text>
+    <text x="946" y="122" font-size="19" text-anchor="middle" fill="#A8422F">乾濕分離＋外檯面洗手台</text>
+    <!-- 玄關 -->
+    <rect x="1107" y="0" width="201.5" height="200" fill="#EFF3F1" stroke="#4A5B62" stroke-width="2" stroke-dasharray="10 6"/>
+    <text x="1207" y="95" font-size="26" text-anchor="middle" fill="#4A5B62" font-weight="bold">玄關</text>
+    <text x="1207" y="127" font-size="18" text-anchor="middle" fill="#8A9A94">大門・對講機・弱電箱</text>
+    <!-- 主浴 -->
+    <rect x="0" y="356" width="255" height="229" fill="#F7E9E5" stroke="#A8422F" stroke-width="4"/>
+    <text x="127" y="455" font-size="26" text-anchor="middle" fill="#A8422F" font-weight="bold">主浴</text>
+    <text x="127" y="487" font-size="19" text-anchor="middle" fill="#A8422F">含浴缸</text>
+    <!-- 走道 -->
+    <rect x="255" y="356" width="486" height="104" fill="#F1F4F2"/>
+    <text x="500" y="418" font-size="22" text-anchor="middle" fill="#8A9A94">走道（寬約0.9–1.0m*）</text>
+    <!-- 主臥 -->
+    <rect x="0" y="585" width="379.5" height="300" fill="#E3EEF0" stroke="#14586A" stroke-width="3"/>
+    <text x="190" y="720" font-size="32" text-anchor="middle" fill="#14586A" font-weight="bold">主臥</text>
+    <text x="190" y="760" font-size="22" text-anchor="middle" fill="#4A5B62">約 3.65×3.35m*・南向窗</text>
+    <!-- 房2 -->
+    <rect x="379.5" y="460" width="300" height="425" fill="#E3EEF0" stroke="#14586A" stroke-width="3"/>
+    <text x="529" y="660" font-size="30" text-anchor="middle" fill="#14586A" font-weight="bold">房2</text>
+    <text x="529" y="698" font-size="22" text-anchor="middle" fill="#4A5B62">約 2.85×3.35m*</text>
+    <text x="529" y="732" font-size="20" text-anchor="middle" fill="#8A9A94">南向窗</text>
+    <!-- 房3 -->
+    <rect x="679.5" y="460" width="285" height="425" fill="#E3EEF0" stroke="#14586A" stroke-width="3"/>
+    <text x="822" y="660" font-size="30" text-anchor="middle" fill="#14586A" font-weight="bold">房3</text>
+    <text x="822" y="698" font-size="22" text-anchor="middle" fill="#4A5B62">約 2.65×3.35m*</text>
+    <text x="822" y="732" font-size="20" text-anchor="middle" fill="#8A9A94">南向窗</text>
+    <!-- 客餐廳 -->
+    <text x="1030" y="330" font-size="30" text-anchor="middle" fill="#1C2B33" font-weight="bold">餐廳</text>
+    <text x="1030" y="368" font-size="20" text-anchor="middle" fill="#8A9A94">（開放・鄰廚房出口）</text>
+    <text x="1135" y="650" font-size="30" text-anchor="middle" fill="#1C2B33" font-weight="bold">客廳</text>
+    <text x="1135" y="688" font-size="20" text-anchor="middle" fill="#8A9A94">寬約3.4m*・臨主陽台</text>
+    <!-- 主陽台 -->
+    <rect x="947" y="885" width="361.5" height="150" fill="#EFF3F1" stroke="#A8422F" stroke-width="4"/>
+    <text x="1128" y="972" font-size="26" text-anchor="middle" fill="#4A5B62">主陽台 約3.4×1.5m*</text>
+    <!-- 花台 -->
+    <rect x="0" y="885" width="947" height="150" fill="none" stroke="#CBD5D2" stroke-width="2" stroke-dasharray="8 6"/>
+    <text x="470" y="972" font-size="22" text-anchor="middle" fill="#B0BCB7">造型花台／格柵（不可及、不可變更）</text>
+    <!-- 尺寸 -->
+    <text x="260" y="30" font-size="24" fill="#8A9A94" font-family="Consolas">519.5</text>
+    <text x="600" y="-178" font-size="24" fill="#8A9A94" font-family="Consolas">221.5</text>
+    <text x="1000" y="-20" font-size="24" fill="#8A9A94" font-family="Consolas">567.5</text>
+    <text x="1318" y="450" font-size="24" fill="#8A9A94" font-family="Consolas" writing-mode="tb">885</text>
+    <text x="155" y="1060" font-size="24" fill="#8A9A94" font-family="Consolas">379.5</text>
+    <text x="500" y="1060" font-size="24" fill="#8A9A94" font-family="Consolas">300</text>
+    <text x="960" y="1060" font-size="24" fill="#8A9A94" font-family="Consolas">629</text>
+  </svg>
+  </div>
+  <figcaption>圖1｜原始格局示意（依 11~20F-A1.pdf 重繪；* 為比例推估值，非精確尺寸）。紅框＝浴廚陽台等不可變更範圍；藍框＝既有臥室（隔間可調）；深紅實塊＝管道間。</figcaption>
+  <div class="legend">
+    <span><span class="sw" style="background:#F7E9E5;border-color:#A8422F"></span>不可變更（浴廚、陽台、管道間）</span>
+    <span><span class="sw" style="background:#E3EEF0;border-color:#14586A"></span>既有臥室（輕隔間可調）</span>
+    <span><span class="sw" style="background:#F1F4F2"></span>開放區／動線</span>
+  </div>
+</figure>
+
+<h3>1.3 不可變更區域 vs 可調整區域（依客變辦法＋圖面）</h3>
+<div class="cols2">
+  <div class="rulecard fixed">
+    <h4>不可變更（本戶對應位置）</h4>
+    <ol>
+      <li>結構牆、柱、樑（圖面黑色實體：北外牆、東西外牆、四角與南側柱位）</li>
+      <li>三間衛浴與廚房之<b>範圍、設備、給排水</b>（主浴／客浴A／客浴B／廚房；浴室門框扇不得移位改向，僅能取消）</li>
+      <li>管道間（客浴B西側）、污廢水管路、消防灑水與感知系統</li>
+      <li>外牆門窗、玻璃、欄杆、前後陽台（含門開向）、花台格柵</li>
+      <li>玄關門（東北角）位置、型式、開向；公共梯廳</li>
+      <li>冷氣主機位置（西北房北側平台）；穿樑套管由建商統一預留，不得變更</li>
+      <li>天花板材料範圍、室內地坪、防火區劃</li>
+    </ol>
+  </div>
+  <div class="rulecard flex">
+    <h4>可調整（本案可運用的工具）</h4>
+    <ol>
+      <li>室內非結構隔間牆移位、取消（<b>需建築師審查</b>，費用另計）——西北房、房2、房3、走道各隔牆</li>
+      <li>隔間牆之門框扇移位、取消（浴室門僅能取消）</li>
+      <li>開關、插座、照明出口、弱電點（電視／網路／電話）、冷氣排水口之移位或取消</li>
+      <li>給排水出口僅限廚房、浴室、陽台範圍內 ±10cm 移位或取消（<b>本案兩方案皆不動水路</b>）</li>
+      <li>油漆、壁面磁磚以整道牆為單位增減；廚衛設備可整套取消或現況點交（本案建議保留，不退）</li>
+    </ol>
+  </div>
+</div>
+
+<h3>1.4 DWG 與 PDF 差異說明</h3>
+<div class="panel">
+  <p style="margin:0">DWG（AC1024／AutoCAD 2010 格式）於本機因無轉檔工具尚未解析，<b>目前無法執行 DWG↔PDF 逐項比對</b>。本報告一律以 PDF 圖面之「標註尺寸字串」為準（1308.5×885cm 與各分段尺寸），其餘室內淨尺寸皆為比例推估並以 * 標記。依需求原則「不一致時以 DWG 為優先」，<b>進入第四階段 3D 建模前，須先以 DWG 完成尺寸校核</b>（安裝 ODA File Converter 轉 DXF 後以 ezdxf 解析，或由建商提供 DXF/T3 版本）。</p>
+</div>
+
+<h3>1.5 假設清單（凡未經 DWG 校核者，均不得視為精確尺寸）</h3>
+<ol class="assume">
+  <li><b>單位與總尺寸</b>：圖面標註單位為公分；室內總寬 1308.5、總深 885（含牆）。<span class="tag assume">圖面實載</span></li>
+  <li><b>牆厚</b>：外牆／結構牆 25–30cm、室內輕隔間 10–12cm。<span class="tag assume">推估</span></li>
+  <li><b>室內淨尺寸</b>：各房淨尺寸為圖面比例推估，誤差 ±10cm；表列見 2.0 節。<span class="tag assume">推估</span></li>
+  <li><b>樑位樑深</b>：樓板高度 3.3m（業主提供）；圖面虛線推測為樑帶，樑深假設 60–70cm，<b>直接影響櫃體高度與床位</b>，需向建商索取結構圖確認。<span class="tag assume">推估</span></li>
+  <li><b>主浴進出方式</b>：判讀為由主臥區短廊進出（套房式），待 DWG 確認門向。<span class="tag assume">待確認</span></li>
+  <li><b>客浴A 門向</b>：判讀為朝西側走道開門，服務西北房與公共區。<span class="tag assume">待確認</span></li>
+  <li><b>房3 與客廳之隔牆</b>：判讀為輕隔間（可調）。<span class="tag assume">待確認</span></li>
+  <li><b>消防灑水頭點位</b>：圖面未逐點判讀，3D 模型尚未納入（業主已註明），新增隔間之涵蓋需建商審查。<span class="tag assume">待確認</span></li>
+</ol>
+
+<!-- ============ 第二階段 ============ -->
+<h2><span class="no">02</span>第二階段：格局方案（二案）</h2>
+<p class="sub">共同前提：四房三衛既有成立、三衛與廚房完全不動、不動任何給排水；兩案差異在「儲物策略」與「客餐廳型態」。家具尺寸假設見 2.3 節。</p>
+
+<h3>2.0 房間使用檢核（兩案共用）</h3>
+<div class="tablebox"><table>
+<tr><th>空間</th><th>淨尺寸(推估)</th><th>建議使用者</th><th>家具檢核（假設尺寸）</th></tr>
+<tr><td>主臥（南西角）</td><td class="num">≈365×335cm</td><td>夫妻</td><td>雙人床152×188＋衣櫃240×60＋梳妝桌90×45 ✓；主浴套房式使用</td></tr>
+<tr><td>西北房</td><td class="num">≈355×295cm</td><td><b>女兒</b>（建議）</td><td>單人床105×188＋書桌120×60＋衣櫃210×60 ✓；與男孩房分屬兩翼、鄰客浴A，青春期隱私最佳</td></tr>
+<tr><td>房2（南向300模組）</td><td class="num">≈285×335cm</td><td>男孩A（長子）</td><td>單人床105×188＋書桌110×60＋衣櫃180×60 ✓</td></tr>
+<tr><td>房3（南向）</td><td class="num">≈265×335cm</td><td>男孩B</td><td>單人床90–105×188＋書桌110×60＋衣櫃150×60 ✓（最緊，衣櫃取淺型或含床頭櫃整合）</td></tr>
+<tr><td>三衛分工</td><td class="num">—</td><td>全家</td><td>主浴（含浴缸）＝夫妻；客浴A＝女兒／西翼；客浴B（乾濕分離＋外洗手台）＝男孩＋訪客，尖峰時段三線併行</td></tr>
+</table></div>
+<div class="note"><b>西北房注意事項</b>：北外側為冷氣主機平台（噪音源）、隔牆鄰廚房與工作陽台。建議該房床位靠西窗側、衣櫃沿東牆兼作隔音緩衝；若家庭更在意「女兒離父母近」，可改為女兒住房2、男孩A住西北房——兩案皆相容，於第三階段一併定案。</div>
+
+<!-- 方案A -->
+<div class="scheme">
+  <h3>方案A｜獨立儲藏室優先 <span class="tag new">新增隔間 1 處</span></h3>
+  <figure>
+    <div class="planbox">
+    <svg viewBox="-15 -195 1345 1265" width="100%" role="img" aria-label="方案A示意圖">
+      <rect x="-15" y="-195" width="1345" height="1265" fill="#FDFDFC"/>
+      <rect x="505" y="-170" width="236" height="170" fill="#EFF3F1" stroke="#A8422F" stroke-width="3"/>
+      <text x="623" y="-75" font-size="26" text-anchor="middle" fill="#8A9A94">工作陽台</text>
+      <rect x="0" y="45" width="519.5" height="840" fill="none" stroke="#1C2B33" stroke-width="7"/>
+      <rect x="519.5" y="0" width="789" height="885" fill="none" stroke="#1C2B33" stroke-width="7"/>
+      <rect x="0" y="45" width="368" height="311" fill="#E3EEF0" stroke="#14586A" stroke-width="3"/>
+      <text x="184" y="195" font-size="30" text-anchor="middle" fill="#14586A" font-weight="bold">女兒房</text>
+      <rect x="368" y="120" width="151.5" height="180" fill="#F7E9E5" stroke="#A8422F" stroke-width="3"/>
+      <text x="444" y="215" font-size="24" text-anchor="middle" fill="#A8422F">客浴A</text>
+      <rect x="519.5" y="0" width="221.5" height="300" fill="#F7E9E5" stroke="#A8422F" stroke-width="3"/>
+      <text x="630" y="155" font-size="26" text-anchor="middle" fill="#A8422F">廚房</text>
+      <rect x="741" y="0" width="45" height="190" fill="#A8422F" opacity=".75"/>
+      <rect x="786" y="0" width="321" height="200" fill="#F7E9E5" stroke="#A8422F" stroke-width="3"/>
+      <text x="946" y="110" font-size="24" text-anchor="middle" fill="#A8422F">客浴B</text>
+      <rect x="1107" y="0" width="201.5" height="200" fill="#EFF3F1" stroke="#4A5B62" stroke-width="2" stroke-dasharray="10 6"/>
+      <text x="1207" y="85" font-size="24" text-anchor="middle" fill="#4A5B62">玄關</text>
+      <!-- 玄關高櫃 -->
+      <rect x="1266" y="205" width="42" height="255" fill="#A8731E" opacity=".85"/>
+      <text x="1290" y="330" font-size="17" text-anchor="middle" fill="#fff" writing-mode="tb">玄關高櫃</text>
+      <!-- 新增儲藏室 -->
+      <rect x="745" y="210" width="145" height="215" fill="#F6EEDD" stroke="#A8731E" stroke-width="5"/>
+      <text x="817" y="300" font-size="24" text-anchor="middle" fill="#A8731E" font-weight="bold">儲藏室</text>
+      <text x="817" y="332" font-size="19" text-anchor="middle" fill="#A8731E">≈1.4×2.15m</text>
+      <text x="817" y="360" font-size="18" text-anchor="middle" fill="#A8731E">約3.0㎡・門朝南</text>
+      <rect x="0" y="356" width="255" height="229" fill="#F7E9E5" stroke="#A8422F" stroke-width="3"/>
+      <text x="127" y="480" font-size="24" text-anchor="middle" fill="#A8422F">主浴</text>
+      <rect x="255" y="356" width="486" height="104" fill="#F1F4F2"/>
+      <rect x="0" y="585" width="379.5" height="300" fill="#E3EEF0" stroke="#14586A" stroke-width="3"/>
+      <text x="190" y="740" font-size="30" text-anchor="middle" fill="#14586A" font-weight="bold">主臥</text>
+      <rect x="379.5" y="460" width="300" height="425" fill="#E3EEF0" stroke="#14586A" stroke-width="3"/>
+      <text x="529" y="670" font-size="27" text-anchor="middle" fill="#14586A" font-weight="bold">男孩A</text>
+      <rect x="679.5" y="460" width="285" height="425" fill="#E3EEF0" stroke="#14586A" stroke-width="3"/>
+      <text x="822" y="670" font-size="27" text-anchor="middle" fill="#14586A" font-weight="bold">男孩B</text>
+      <text x="1090" y="330" font-size="26" text-anchor="middle" fill="#1C2B33" font-weight="bold">餐廳</text>
+      <text x="1135" y="650" font-size="26" text-anchor="middle" fill="#1C2B33" font-weight="bold">客廳</text>
+      <rect x="947" y="885" width="361.5" height="150" fill="#EFF3F1" stroke="#A8422F" stroke-width="3"/>
+      <text x="1128" y="970" font-size="22" text-anchor="middle" fill="#4A5B62">主陽台</text>
+    </svg>
+    </div>
+    <figcaption>圖2｜方案A示意。金框＝新增輕隔間儲藏室（利用餐廳西北畸零帶，緊貼管道間與客浴B南牆）；金色實塊＝玄關高櫃（木作，非客變隔間）。</figcaption>
+  </figure>
+
+  <h4>1｜四房來源</h4>
+  <ul><li>原格局即四房，<b>不需增隔房間</b>；本案新增的唯一隔間是儲藏室。</li></ul>
+
+  <h4>2｜房間分配與家具</h4>
+  <ul><li>依 2.0 節檢核表：主臥＝夫妻、西北房＝女兒、房2＝男孩A、房3＝男孩B。</li></ul>
+
+  <h4>3｜儲物空間</h4>
+  <ul>
+    <li><b>獨立儲藏室</b>：位於餐廳西北畸零帶（廚房出口東側、管道間與客浴B 南側），約 <span class="dim">1.4×2.15m ≈ 3.0㎡</span>，向南開門（拉門或摺門）。內配 L 型層板＋掛勾：28 吋行李箱×3 直立收納、吸塵器、電風扇、季節寢具、孩子大型玩具、備品。此位置在「玄關→餐廳→廚房」三角動線的節點上，<b>拿取順手且不穿越任何房間</b>。</li>
+    <li><b>玄關高櫃</b>：沿玄關東牆（進門右手）深 40cm 頂天鞋櫃＋雜物櫃，中段留檯面；<b>弱電箱與對講機位置預留檢修門</b>。</li>
+  </ul>
+
+  <h4>4｜動線</h4>
+  <ul>
+    <li>玄關→餐廳→廚房：直線，買菜回家 5 步內入廚。</li>
+    <li>餐廳為十字節點：北通儲藏室與客浴B、西通走道三房、南通客廳陽台，無迂迴。</li>
+    <li>洗衣動線：各房→走道→廚房→工作陽台，不經過客廳。</li>
+  </ul>
+
+  <h4>5｜採光・通風・隱私・噪音</h4>
+  <ul>
+    <li>四房全數保有外窗（西×1、南×3），<b>無暗房產生</b>；儲藏室為儲物用途無窗，門扇建議附通風百葉。</li>
+    <li>儲藏室使餐廳北側界面變「窄口」，餐廳自然光主要靠南側客廳窗與陽台間接引入——此為本案最大代價，見優缺點。</li>
+    <li>女兒房與男孩房分屬東西兩翼，成長期隱私佳；客浴B 外洗手台讓訪客不進入衛浴濕區。</li>
+  </ul>
+
+  <h4>6｜機電調整項目（客變單）</h4>
+  <ul>
+    <li>新增儲藏室：照明出口×1＋開關×1＋插座×1（充電式吸塵器）。</li>
+    <li>餐廳原天花燈出線口配合餐桌新位置微調；玄關櫃內插座×1（除濕棒／烘鞋）。</li>
+    <li>各房插座／網路點依 2.0 節床位書桌微調（同回合一次提出）。</li>
+    <li>不動：所有給排水、冷氣排水口、浴廚設備。</li>
+  </ul>
+
+  <h4>7｜需建商確認事項</h4>
+  <ul>
+    <li>新增隔間須經建築師審查（高層法規），費用另計。</li>
+    <li><b>封閉儲藏室的消防灑水／偵煙涵蓋</b>——灑水與感知系統不得變更，若既有點位無法涵蓋新隔間，此室須改為「木作高櫃陣」替代（退回類方案B作法）。</li>
+    <li>儲藏室北牆是否可直接靠貼管道間／客浴B牆體。</li>
+  </ul>
+
+  <h4>8｜優缺點與適合情境</h4>
+  <div class="procon">
+    <div class="pro"><b>優點</b>行李箱與大型雜物完全隱形，一室搞定；玄關—餐廳—廚房家事動線最短；四房與公共區面積幾乎無損（僅取畸零帶）。</div>
+    <div class="con"><b>缺點</b>多一道隔間的審查與費用；餐廳北側視覺變窄、餐區壓縮約 3㎡；儲藏室無窗需靠百葉通風。<br><b>適合</b>：收納量大、行李箱多、希望「雜物完全看不見」的家庭。</div>
+  </div>
+</div>
+
+<!-- 方案B -->
+<div class="scheme b">
+  <h3>方案B｜大客餐廳＋整合式收納（餐桌核心） <span class="tag flex">不動任何隔間</span></h3>
+  <figure>
+    <div class="planbox">
+    <svg viewBox="-15 -195 1345 1265" width="100%" role="img" aria-label="方案B示意圖">
+      <rect x="-15" y="-195" width="1345" height="1265" fill="#FDFDFC"/>
+      <rect x="505" y="-170" width="236" height="170" fill="#EFF3F1" stroke="#A8422F" stroke-width="3"/>
+      <text x="623" y="-75" font-size="26" text-anchor="middle" fill="#8A9A94">工作陽台＋吊櫃</text>
+      <rect x="0" y="45" width="519.5" height="840" fill="none" stroke="#1C2B33" stroke-width="7"/>
+      <rect x="519.5" y="0" width="789" height="885" fill="none" stroke="#1C2B33" stroke-width="7"/>
+      <rect x="0" y="45" width="368" height="311" fill="#E3EEF0" stroke="#14586A" stroke-width="3"/>
+      <text x="184" y="195" font-size="30" text-anchor="middle" fill="#14586A" font-weight="bold">女兒房</text>
+      <rect x="368" y="120" width="151.5" height="180" fill="#F7E9E5" stroke="#A8422F" stroke-width="3"/>
+      <text x="444" y="215" font-size="24" text-anchor="middle" fill="#A8422F">客浴A</text>
+      <rect x="519.5" y="0" width="221.5" height="300" fill="#F7E9E5" stroke="#A8422F" stroke-width="3"/>
+      <text x="630" y="155" font-size="26" text-anchor="middle" fill="#A8422F">廚房</text>
+      <rect x="741" y="0" width="45" height="190" fill="#A8422F" opacity=".75"/>
+      <rect x="786" y="0" width="321" height="200" fill="#F7E9E5" stroke="#A8422F" stroke-width="3"/>
+      <text x="946" y="110" font-size="24" text-anchor="middle" fill="#A8422F">客浴B</text>
+      <rect x="1107" y="0" width="201.5" height="200" fill="#EFF3F1" stroke="#4A5B62" stroke-width="2" stroke-dasharray="10 6"/>
+      <text x="1207" y="85" font-size="24" text-anchor="middle" fill="#4A5B62">玄關</text>
+      <!-- 北側整合收納帶 -->
+      <rect x="750" y="205" width="357" height="48" fill="#A8731E" opacity=".85"/>
+      <text x="928" y="238" font-size="19" text-anchor="middle" fill="#fff">餐櫃＋電器＋雜物高櫃帶（深45cm）</text>
+      <rect x="1266" y="205" width="42" height="255" fill="#A8731E" opacity=".85"/>
+      <text x="1290" y="330" font-size="17" text-anchor="middle" fill="#fff" writing-mode="tb">玄關高櫃</text>
+      <!-- 大餐桌 -->
+      <rect x="890" y="330" width="240" height="100" fill="none" stroke="#A8731E" stroke-width="4" stroke-dasharray="12 7"/>
+      <text x="1010" y="390" font-size="22" text-anchor="middle" fill="#A8731E" font-weight="bold">家庭大桌 240×100</text>
+      <text x="1010" y="470" font-size="19" text-anchor="middle" fill="#8A9A94">用餐・寫作業・工作的家庭核心</text>
+      <rect x="0" y="356" width="255" height="229" fill="#F7E9E5" stroke="#A8422F" stroke-width="3"/>
+      <text x="127" y="480" font-size="24" text-anchor="middle" fill="#A8422F">主浴</text>
+      <rect x="255" y="356" width="486" height="104" fill="#F1F4F2"/>
+      <text x="498" y="420" font-size="19" text-anchor="middle" fill="#8A9A94">走道端景收納櫃→</text>
+      <rect x="0" y="585" width="379.5" height="300" fill="#E3EEF0" stroke="#14586A" stroke-width="3"/>
+      <text x="190" y="740" font-size="30" text-anchor="middle" fill="#14586A" font-weight="bold">主臥</text>
+      <rect x="379.5" y="460" width="300" height="425" fill="#E3EEF0" stroke="#14586A" stroke-width="3"/>
+      <text x="529" y="670" font-size="27" text-anchor="middle" fill="#14586A" font-weight="bold">男孩A</text>
+      <rect x="679.5" y="460" width="285" height="425" fill="#E3EEF0" stroke="#14586A" stroke-width="3"/>
+      <text x="822" y="670" font-size="27" text-anchor="middle" fill="#14586A" font-weight="bold">男孩B</text>
+      <text x="1150" y="620" font-size="26" text-anchor="middle" fill="#1C2B33" font-weight="bold">客廳（輕沙發區）</text>
+      <text x="1150" y="658" font-size="19" text-anchor="middle" fill="#8A9A94">保留電視出線口，去電視化亦可</text>
+      <rect x="947" y="885" width="361.5" height="150" fill="#EFF3F1" stroke="#A8422F" stroke-width="3"/>
+      <text x="1128" y="970" font-size="22" text-anchor="middle" fill="#4A5B62">主陽台</text>
+    </svg>
+    </div>
+    <figcaption>圖3｜方案B示意。不新增任何隔間；金色帶＝交屋後木作／系統櫃（不入客變帳），客變僅處理電氣點位。</figcaption>
+  </figure>
+
+  <h4>1｜四房來源</h4>
+  <ul><li>同方案A：原格局即四房，完全不動隔間。</li></ul>
+
+  <h4>2｜房間分配與家具</h4>
+  <ul><li>同 2.0 節；各房另以「頂天衣櫃＋床下抽屜／掀床」把收納內化到房間裡。</li></ul>
+
+  <h4>3｜儲物策略（分散整合式）</h4>
+  <ul>
+    <li><b>北牆收納帶</b>：沿客浴B 南牆設深 45cm、長約 3.5m 連續高櫃（餐櫃＋電器櫃＋雜物櫃），吸收餐廳日常雜物與小家電。</li>
+    <li><b>玄關高櫃</b>：同方案A（深40cm，含弱電檢修門）。</li>
+    <li><b>走道端景櫃</b>：走道西端（主浴門側）設深 35–40cm 家政櫃：清潔用品、備品、藥箱。</li>
+    <li><b>工作陽台吊櫃</b>：洗衣耗材與工具（不落地、不影響設備）。</li>
+    <li><b>行李箱</b>：主臥衣櫃上層＋各房床下分散收納。</li>
+  </ul>
+
+  <h4>4｜動線＋客餐整合</h4>
+  <ul>
+    <li>回應「全家主要時間在餐桌用餐＋寫作業、幾乎不看電視」的實際生活：<b>以 240×100 大桌為家庭核心</b>，置於廚房出口正前方、採光腹地中央；客廳退為輕沙發閱讀區（電視出線口保留，未來可上可不上）。</li>
+    <li>公共區完全無新增牆體，玄關進門即見全深景深，開闊感最大。</li>
+  </ul>
+
+  <h4>5｜採光・通風・隱私・噪音</h4>
+  <ul>
+    <li>四房外窗同原始格局；公共區南向採光面完整無遮擋，通風對流（南窗↔工作陽台）最順。</li>
+    <li>大桌區位於動線中心，寫作業時段建議搭配吊燈＋壁面吸音材；孩子作息錯開時客廳沙發區為第二安靜角。</li>
+  </ul>
+
+  <h4>6｜機電調整項目（客變單）</h4>
+  <ul>
+    <li>大桌位置上方新增／移位照明出口×1（吊燈）＋壁插×2（筆電、檯燈）。</li>
+    <li>北牆收納帶預留插座×3（電器櫃 220V 視需求）＋餐櫃檯面插座。</li>
+    <li>走道端景櫃處插座×1；各房點位微調同方案A。</li>
+    <li>不動：隔間、給排水、浴廚、冷氣排水口——<b>客變項目最少、審查風險最低</b>。</li>
+  </ul>
+
+  <h4>7｜需建商確認事項</h4>
+  <ul>
+    <li>僅電氣點位變更，原則上無建築師隔間審查；確認插座迴路容量（電器櫃 220V）。</li>
+    <li>玄關櫃與弱電箱／開關箱（總 40P）的相對位置與檢修空間。</li>
+  </ul>
+
+  <h4>8｜優缺點與適合情境</h4>
+  <div class="procon">
+    <div class="pro"><b>優點</b>公共區最大化、景深與採光最佳；客變項目最少＝可執行性最高、幾乎無審查風險；「大桌核心」精準對應這個家的真實使用方式；櫃體留待交屋後裝修，設計自由度高。</div>
+    <div class="con"><b>缺點</b>無獨立儲藏室，行李箱與大型物需分散收納（可及性略差）；收納櫃體費用移到交屋後裝修階段。<br><b>適合</b>：重視開闊感與餐桌生活、願意以系統櫃分散收納的家庭。</div>
+  </div>
+</div>
+
+<h3>2.3 家具尺寸假設（兩案共用）</h3>
+<div class="tablebox"><table>
+<tr><th>項目</th><th>假設尺寸 (cm)</th><th>項目</th><th>假設尺寸 (cm)</th></tr>
+<tr><td>雙人床（標準）</td><td class="num">152×188</td><td>單人床（加大）</td><td class="num">105×188</td></tr>
+<tr><td>孩童書桌</td><td class="num">110–120×60</td><td>衣櫃（深）</td><td class="num">60</td></tr>
+<tr><td>家庭大桌（方案B）</td><td class="num">240×100</td><td>餐桌（方案A）</td><td class="num">180×90</td></tr>
+<tr><td>三人沙發</td><td class="num">220×95</td><td>28吋行李箱</td><td class="num">48×30×76</td></tr>
+</table></div>
+
+<!-- ============ 比較與初步傾向 ============ -->
+<h2><span class="no">03</span>方案比較與初步傾向</h2>
+<div class="tablebox"><table>
+<tr><th>評估項（依委託原則）</th><th>方案A 獨立儲藏室</th><th>方案B 大客餐廳＋整合收納</th></tr>
+<tr><td>五口長期居住・孩子各自成長</td><td>◎ 四房＋隱形收納</td><td>◎ 四房＋房內收納內化</td></tr>
+<tr><td>公共空間舒適度</td><td>○ 餐廳北側略壓縮</td><td>◎ 開闊感、採光、景深最佳</td></tr>
+<tr><td>收納足夠・好拿取</td><td>◎ 3㎡ 儲藏室一室搞定</td><td>○ 分散式，量足但大型物可及性略差</td></tr>
+<tr><td>客變可執行性</td><td>○ 需隔間審查＋消防涵蓋確認</td><td>◎ 僅電氣點位，風險最低</td></tr>
+<tr><td>客變階段成本</td><td>隔間費＋審查費＋放樣費</td><td>最低（櫃體費移至交屋後）</td></tr>
+</table></div>
+<div class="note">
+<b>初步傾向（非最終推薦）</b>：以「客變可執行性高＋公共空間舒適」權重看，<b>方案B 為主軸</b>；若儲藏需求強烈，可採<b>混搭案</b>——方案B 佈局＋方案A 的儲藏室縮小版（約 1.2×1.8m），先向建商確認消防涵蓋可行後再決定是否納入客變。正式推薦與取捨說明將於<b>第三階段</b>（您確認方向後）出具。
+</div>
+
+<!-- ============ 客變確認清單 ============ -->
+<h2><span class="no">04</span>需向建商確認之客變清單</h2>
+<ol class="checklist">
+  <li><b>索取結構圖／樑位圖與 DWG 可讀版本</b>（或 DXF），完成尺寸校核——樑深直接影響櫃體與床位。</li>
+  <li><b>方案A 儲藏室</b>：新增隔間之建築師審查可行性、費用、以及既有消防灑水／偵煙點位能否涵蓋（不可變更消防系統為前提）。</li>
+  <li>客變<b>申請期限與圖面版本</b>；確認須依建商圖例繪製（辦法明定不接受設計師另出圖面），我方成果須轉繪為建商格式。</li>
+  <li><b>客變一次為限</b>——所有電氣點位（含各房床位書桌對位）須在同一回合一次提齊。</li>
+  <li>玄關高櫃與<b>弱電箱、總開關箱（40P）、對講主機</b>的相對位置與檢修需求。</li>
+  <li>冷氣室內機預留位置、排水口點位與各房床位的相容性（排水口可移位／取消，主機位置不可動）。</li>
+  <li>房2／房3 <b>南向窗台高度</b>（影響書桌貼窗配置）。</li>
+  <li>廚衛設備<b>全數保留不退</b>（依實品屋樣式），僅確認免治馬桶插座、RO 插座等既有點位無須變動。</li>
+</ol>
+
+<!-- ============ 下一步 ============ -->
+<h2><span class="no">05</span>下一步</h2>
+<div class="panel">
+  <ol style="margin:0;padding-left:22px">
+    <li><b>您決定</b>：方案A／方案B／混搭案，以及女兒房位置（西北房 vs 房2）。</li>
+    <li><b>第三階段</b>：出具正式推薦方案報告（推薦理由、犧牲項、客變先行項 vs 交屋後裝修項切分）。</li>
+    <li><b>DWG 校核</b>：安裝 ODA File Converter（免費）轉 DXF 後解析，或向建商索取 DXF；修正本報告所有推估尺寸。</li>
+    <li><b>第四階段</b>：依 DWG 精確尺寸建立 3D 模型（樓板高 3.3m、分層：結構不可變更／客變隔間／固定櫃體／活動家具／機電點位），輸出平面配置圖、家具配置圖、3D 視角、客變前後對照與客變確認清單。</li>
+  </ol>
+</div>
+
+<footer>
+本報告依 11~20F-A1.pdf、11~20F-A1（模型）.pdf、原森TWIN TOWERS 客變辦法與衛浴廚房樣式照片判讀編製；標記 * 之尺寸為比例推估，一切以建商正式圖面與審查結果為準。DWG（AC1024）待轉檔校核，若與 PDF 不一致以 DWG 為優先。
+</footer>
+</div>
+
+</body>
+</html>
