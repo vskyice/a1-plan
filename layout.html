@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A1戶 擺家具工具</title>
+<style>
+  :root{
+    --paper:#F6F8F7; --panel:#FFF; --ink:#1C2B33; --soft:#4A5B62;
+    --accent:#14586A; --accent-soft:#E3EEF0; --line:#CBD5D2;
+    --new:#A8731E; --fixed:#A8422F;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Noto Sans TC","Microsoft JhengHei",sans-serif;-webkit-text-size-adjust:100%}
+  header{padding:10px 14px 6px}
+  header .eyebrow{font-size:11px;letter-spacing:.15em;color:var(--accent);font-weight:700}
+  header h1{font-size:18px;margin:2px 0 4px;font-family:"Noto Serif TC","PMingLiU",serif}
+  header p{font-size:12.5px;color:var(--soft);margin:0;line-height:1.6}
+  .bar{display:flex;flex-wrap:wrap;gap:6px;padding:8px 14px;align-items:center}
+  .bar select,.bar button,.bar input{
+    font-size:14px;padding:7px 10px;border:1px solid var(--line);border-radius:8px;
+    background:var(--panel);color:var(--ink);font-family:inherit;
+  }
+  .bar button{cursor:pointer;font-weight:600}
+  .bar button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .bar button.warn{color:var(--fixed)}
+  .bar .grow{flex:1}
+  #stage{overflow:auto;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:#EDF1EF;max-height:66vh;position:relative}
+  svg{display:block;margin:0 auto}
+  svg .furn{touch-action:none;cursor:grab}
+  svg .furn.sel rect.body{stroke:#14586A;stroke-width:4}
+  svg text{pointer-events:none;user-select:none}
+  #info{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;padding:8px 14px;
+    font-size:13.5px;background:var(--panel);border-bottom:1px solid var(--line);min-height:44px}
+  #info b{color:var(--accent)}
+  #info input[type=number]{width:70px;font-size:14px;padding:5px 6px;border:1px solid var(--line);border-radius:6px}
+  #info button{font-size:13px;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:#fff;cursor:pointer}
+  #info button.del{color:var(--fixed);border-color:#E0BFB6}
+  .hint{padding:8px 14px 4px;font-size:12.5px;color:var(--soft);line-height:1.7}
+  .io{padding:8px 14px 30px}
+  .io textarea{width:100%;height:90px;font-size:11px;font-family:Consolas,monospace;
+    border:1px solid var(--line);border-radius:8px;padding:8px;background:#fff}
+  .io .row{display:flex;gap:8px;margin:8px 0;flex-wrap:wrap}
+  .io button{font-size:14px;padding:8px 14px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;font-weight:600}
+  .io button.primary{background:var(--new);color:#fff;border-color:var(--new)}
+  #toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;
+    padding:10px 18px;border-radius:20px;font-size:14px;opacity:0;transition:opacity .3s;pointer-events:none;z-index:9}
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">原森 TWIN TOWERS · A1戶 · DWG實測 1:1</div>
+  <h1>擺家具工具 🛋️</h1>
+  <p>灰色＝牆體浴廚（不可動）。點下方「新增家具」放入物件，<b>拖曳移動</b>、點選後可<b>旋轉／改尺寸／刪除</b>。排好後按最下方「匯出配置」把檔案傳給我，我照這份做 3D。</p>
+</header>
+
+<div class="bar">
+  <select id="palette"></select>
+  <button class="primary" id="addBtn">＋ 新增家具</button>
+  <span class="grow"></span>
+  <button id="zoomOut">－</button>
+  <button id="zoomIn">＋</button>
+</div>
+
+<div id="info"><span style="color:var(--soft)">尚未選取家具——點一下任何家具即可編輯</span></div>
+
+<div id="stage"><svg id="svg"></svg></div>
+
+<div class="hint">
+  💡 手機：單指拖家具、畫面用兩指捲動縮放。家具上的數字＝公分。自動儲存於此裝置，關掉再開仍在。
+</div>
+
+<div class="bar">
+  <button id="resetB">↺ 載入方案B預設</button>
+  <button class="warn" id="clearAll">清空全部家具</button>
+</div>
+
+<div class="io">
+  <div class="row">
+    <button class="primary" id="exportBtn">📤 匯出配置（下載 .json）</button>
+    <button id="copyBtn">複製配置文字</button>
+    <button id="importBtn">📥 匯入配置檔</button>
+    <input type="file" id="importFile" accept=".json,application/json" style="display:none">
+  </div>
+  <textarea id="ioText" placeholder="匯出後配置文字會出現在這裡；也可把我給你的配置貼進來後按「匯入配置檔」旁的貼上匯入。"></textarea>
+  <div class="row"><button id="pasteImport">貼上文字匯入</button></div>
+</div>
+<div id="toast"></div>
+
+<script>
+'use strict';
+/* ================= 座標：公分，原點=室內西南角，Y向北 ================= */
+const PLAN = { minX:-90, maxX:1320, minY:-165, maxY:1075 };
+const H = PLAN.maxY;           // svg y = H - planY
+const svg = document.getElementById('svg');
+const NS = 'http://www.w3.org/2000/svg';
+let zoom = 1;
+
+function el(tag, attrs, parent){
+  const e = document.createElementNS(NS, tag);
+  for(const k in attrs) e.setAttribute(k, attrs[k]);
+  (parent||svg).appendChild(e); return e;
+}
+function R(x1,y1,x2,y2,fill,parent,extra){
+  const a = Object.assign({x:Math.min(x1,x2), y:H-Math.max(y1,y2),
+    width:Math.abs(x2-x1), height:Math.abs(y2-y1), fill:fill}, extra||{});
+  return el('rect', a, parent);
+}
+function T(x,y,s,size,fill,parent,anchor){
+  const t = el('text',{x:x, y:H-y, 'font-size':size||26, fill:fill||'#8A9A94',
+    'text-anchor':anchor||'middle','dominant-baseline':'middle'},parent);
+  t.textContent = s; return t;
+}
+
+/* ================= 靜態圖層（不可變更） ================= */
+const gStatic = el('g',{});
+const WALL='#7A8388', PART='#9AA5A8', GLASS='#BFD8E2', FIX='#C9CFD1', BAL='#E3E8E6';
+
+// 樓板底
+R(0,0,1308.5,885,'#FAFAF8',gStatic);
+R(342,900,698,1057.5,BAL,gStatic);            // 工作陽台
+R(922,-152.5,1308.5,0,BAL,gStatic);           // 主陽台
+R(85,-45,837,0,'#EEF1EF',gStatic);            // 花台
+R(-78,855,292,970,'#EEF1EF',gStatic);         // 冷氣平台
+
+// 南牆＋窗
+[[85,167],[289,430],[610,700],[880,1019],[1140,1146],[1236,1308.5]].forEach(s=>R(s[0],0,s[1],15,WALL,gStatic));
+[[167,289],[430,610],[700,880],[1019,1140]].forEach(s=>R(s[0],3,s[1],12,GLASS,gStatic));
+R(1146,3,1236,12,'#D8ECF2',gStatic);          // 陽台落地門
+// 西牆
+R(85,15,100,420,WALL,gStatic); R(85,420,100,500,GLASS,gStatic); R(85,500,100,541,WALL,gStatic);
+R(0,531,85,541,WALL,gStatic);
+R(0,541,15,600,WALL,gStatic); R(0,600,15,760,GLASS,gStatic); R(0,760,15,840,WALL,gStatic);
+// 北側
+R(0,840,292,855,WALL,gStatic); R(292,840,342,960,WALL,gStatic);
+R(342,885,590,900,WALL,gStatic); R(670,885,1170,900,WALL,gStatic); R(1270,885,1308.5,900,WALL,gStatic);
+R(1055,845,1170,885,WALL,gStatic);
+// 工作陽台圍
+R(342,900,357,1057.5,WALL,gStatic); R(683,900,698,1057.5,WALL,gStatic);
+R(357,1042.5,683,1057.5,WALL,gStatic); R(360,1044,680,1051,GLASS,gStatic);
+// 東牆＋柱
+R(1293.5,15,1308.5,885,WALL,gStatic); R(1293.5,-128,1308.5,15,WALL,gStatic);
+R(-15,-110,85,15,WALL,gStatic); R(837,-125,937,15,WALL,gStatic);
+// 管道間
+[[150,541,215,645],[435,541,540,605],[1125,690,1185,790]].forEach(p=>{
+  R(p[0],p[1],p[2],p[3],'#B9552F',gStatic,{opacity:.75});
+});
+// 隔間牆（10cm，留門洞）
+const parts = [
+ [85,368.5,247,378.5],[247,378.5,257,435],[247,515,257,531],
+ [367,15,377,401.5],[377,401.5,572,411.5],[652,401.5,667,411.5],
+ [667,15,677,371.5],[677,371.5,692,381.5],[772,371.5,937,381.5],
+ [927,15,937,371.5],
+ [15,531,272,541],[362,531,417,541],
+ [502,531,562,541],[672,531,728.5,541],
+ [502,541,512,885],[718.5,541,728.5,885],
+ [357,541,367,561],[357,651,367,885],
+ [367,650,372,660],[442,650,502,660],
+ [925,715,935,885],[925,705,1035,715],[1115,705,1125,715],[1115,715,1125,885]
+];
+parts.forEach(p=>R(p[0],p[1],p[2],p[3],PART,gStatic));
+// 固定設備
+const fixt = [
+ ['浴缸',105,383,245,455],['馬桶',102,472,142,512],['面盆',202,470,244,528],
+ ['馬桶',442,740,482,780],['面盆',372,670,412,728],['淋浴',372,795,452,880],
+ ['馬桶',1041,735,1081,775],['面盆',945,840,1035,880],['淋浴',935,715,1010,790],
+ ['廚具',512,545,572,820]
+];
+fixt.forEach(f=>{
+  R(f[1],f[2],f[3],f[4],FIX,gStatic,{stroke:'#AeB6B8','stroke-width':1.5});
+  T((f[1]+f[3])/2,(f[2]+f[4])/2,f[0],20,'#7A8388',gStatic);
+});
+// 房間標籤
+[['主臥',225,190],['主浴',170,340],['房2',522,200],['房3',802,195],['客廳',1110,480],
+ ['餐廳',1000,600],['廚房',630,650],['客浴A',437,620],['客浴B',1028,660],['玄關',1215,800],
+ ['西北房（女兒房）',185,720],['走道',450,470],['工作陽台',520,985],['主陽台',1110,-80],
+ ['冷氣平台',110,915],['儲物彈性帶',790,760]
+].forEach(l=>T(l[1],l[2],l[0],28,'#9FB0AA',gStatic));
+
+/* ================= 家具 ================= */
+const gFurn = el('g',{});
+const LIB = [
+ ['雙人床',152,188],['單人床(加大)',105,188],['單人床',90,188],
+ ['衣櫃 240',240,60],['衣櫃 210',210,60],['衣櫃 180',180,60],['衣櫃 150',150,60],
+ ['書桌 120',120,60],['書桌 110',110,60],['餐桌 240×100',240,100],['餐桌 180×90',180,90],
+ ['沙發 220',220,95],['沙發 180',180,90],['茶几',80,80],['電視櫃',180,40],
+ ['床頭櫃',45,40],['梳妝台',90,45],['五斗櫃',100,50],
+ ['高櫃(深45)',120,45],['鞋櫃(深40)',120,40],['書櫃(深35)',120,35],
+ ['冰箱',70,72],['洗衣機',65,65],['雙人書桌 240',240,60],['自訂尺寸…',100,100]
+];
+const DEFAULT_B = [
+ ['雙人床',155,170,152,188,0],['床頭櫃',110,315,45,40,0],['床頭櫃',312,315,45,40,0],
+ ['衣櫃 240',102,35,60,240,90],['梳妝台',290,25,70,45,0],
+ ['單人床(加大)',35,640,105,188,0],['書桌 120',190,555,120,60,0],['衣櫃 210',294,640,60,190,90],
+ ['單人床(加大)',552,212,105,188,0],['書桌 120',400,30,120,60,0],['衣櫃 180',382,220,60,180,90],
+ ['單人床(加大)',812,182,105,188,0],['書桌 120',755,30,120,60,0],['衣櫃 150',682,95,60,150,90],
+ ['餐桌 240×100',880,320,240,100,0],['沙發 220',945,90,95,220,90],['茶几',1075,160,80,80,0],
+ ['電視櫃',1250,110,42,200,90],['高櫃(深45)',935,660,180,45,0],['鞋櫃(深40)',1255,710,35,150,90],
+ ['高櫃(深45)',442,503,88,26,0],['冰箱',655,820,60,63,0],['洗衣機',615,910,65,65,0]
+];
+let items = [];   // {id,name,x,y,w,d,rot}
+let seq = 1, selId = null;
+
+const palette = document.getElementById('palette');
+LIB.forEach((f,i)=>{
+  const o = document.createElement('option');
+  o.value = i; o.textContent = `${f[0]}（${f[1]}×${f[2]}cm）`;
+  palette.appendChild(o);
+});
+
+function toast(m){
+  const t = document.getElementById('toast');
+  t.textContent = m; t.style.opacity = 1;
+  clearTimeout(t._h); t._h = setTimeout(()=>t.style.opacity=0, 1800);
+}
+function save(){ localStorage.setItem('a1_layout_v1', JSON.stringify(items)); }
+function load(){
+  try{
+    const s = localStorage.getItem('a1_layout_v1');
+    if(s){ items = JSON.parse(s); seq = Math.max(0,...items.map(i=>i.id))+1; return; }
+  }catch(e){}
+  loadDefault();
+}
+function loadDefault(){
+  items = DEFAULT_B.map(d=>({id:seq++, name:d[0], x:d[1], y:d[2], w:d[3], d:d[4], rot:d[5]||0}));
+}
+
+function render(){
+  gFurn.innerHTML = '';
+  items.forEach(it=>{
+    const g = el('g',{class:'furn'+(it.id===selId?' sel':''),'data-id':it.id},gFurn);
+    R(it.x,it.y,it.x+it.w,it.y+it.d,'#E9D9BC',g,{class:'body',stroke:'#B08A4F','stroke-width':2,rx:3});
+    T(it.x+it.w/2, it.y+it.d/2+14, it.name, 22, '#6B5228', g);
+    T(it.x+it.w/2, it.y+it.d/2-16, `${it.w}×${it.d}`, 20, '#8A6F3F', g);
+    g.addEventListener('pointerdown', startDrag);
+  });
+  updateInfo(); save();
+}
+function updateInfo(){
+  const box = document.getElementById('info');
+  const it = items.find(i=>i.id===selId);
+  if(!it){ box.innerHTML = '<span style="color:var(--soft)">尚未選取家具——點一下任何家具即可編輯</span>'; return; }
+  box.innerHTML = `<b>${it.name}</b>
+    寬 <input type="number" id="iw" value="${it.w}" min="10" max="400"> ×
+    深 <input type="number" id="id_" value="${it.d}" min="10" max="400"> cm
+    <button id="rotB">↻ 旋轉</button><button id="dupB">⧉ 複製</button><button class="del" id="delB">🗑 刪除</button>`;
+  document.getElementById('iw').onchange = e=>{ it.w = +e.target.value||it.w; render(); };
+  document.getElementById('id_').onchange = e=>{ it.d = +e.target.value||it.d; render(); };
+  document.getElementById('rotB').onclick = ()=>{ const w=it.w; it.w=it.d; it.d=w; it.rot=(it.rot+90)%360; render(); };
+  document.getElementById('dupB').onclick = ()=>{
+    items.push(Object.assign({}, it, {id:seq++, x:it.x+30, y:it.y-30})); selId = seq-1; render();
+  };
+  document.getElementById('delB').onclick = ()=>{ items = items.filter(i=>i.id!==it.id); selId=null; render(); };
+}
+
+/* 拖曳（Pointer Events，含觸控）——拖曳中只改 transform，放開才重繪 */
+let drag = null;
+function svgPoint(ev){
+  const pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY;
+  const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+  return {x:p.x, y:H-p.y};
+}
+function startDrag(ev){
+  const id = +ev.currentTarget.getAttribute('data-id');
+  const it = items.find(i=>i.id===id);
+  if(selId !== id){ selId = id; render(); }
+  const g = gFurn.querySelector(`g[data-id="${id}"]`);
+  const p = svgPoint(ev);
+  drag = {it, g, x0:it.x, y0:it.y, px:p.x, py:p.y};
+  try{ g.setPointerCapture(ev.pointerId); }catch(e){}
+  ev.preventDefault();
+}
+svg.addEventListener('pointermove', ev=>{
+  if(!drag) return;
+  const p = svgPoint(ev);
+  const nx = Math.round((drag.x0 + p.x - drag.px)/5)*5;
+  const ny = Math.round((drag.y0 + p.y - drag.py)/5)*5;
+  drag.it.x = nx; drag.it.y = ny;
+  drag.g.setAttribute('transform', `translate(${nx-drag.x0},${-(ny-drag.y0)})`);
+});
+svg.addEventListener('pointerup', ()=>{ if(drag){ drag=null; render(); } });
+svg.addEventListener('pointercancel', ()=>{ if(drag){ drag=null; render(); } });
+svg.addEventListener('pointerdown', ev=>{
+  if(ev.target === svg || ev.target.parentNode === gStatic){ selId = null; render(); }
+});
+
+/* 縮放 */
+function fit(){
+  const W = PLAN.maxX-PLAN.minX, Hh = PLAN.maxY-PLAN.minY;
+  svg.setAttribute('viewBox', `${PLAN.minX} 0 ${W} ${Hh}`);
+  const base = Math.min(document.getElementById('stage').clientWidth || 800, 1100);
+  svg.setAttribute('width', base*zoom);
+  svg.setAttribute('height', base*zoom*Hh/W);
+}
+document.getElementById('zoomIn').onclick = ()=>{ zoom = Math.min(zoom*1.25, 4); fit(); };
+document.getElementById('zoomOut').onclick = ()=>{ zoom = Math.max(zoom/1.25, .6); fit(); };
+window.addEventListener('resize', fit);
+
+/* 工具列 */
+document.getElementById('addBtn').onclick = ()=>{
+  const f = LIB[+palette.value];
+  let name = f[0], w = f[1], d = f[2];
+  if(name.startsWith('自訂')){
+    name = prompt('名稱？','櫃體')||'櫃體';
+    w = +prompt('寬(cm)？','100')||100;
+    d = +prompt('深(cm)？','60')||60;
+  }
+  items.push({id:seq++, name, x:600, y:430, w, d, rot:0});
+  selId = seq-1; render(); toast('已新增，拖到定位');
+};
+document.getElementById('resetB').onclick = ()=>{
+  if(confirm('載入方案B預設配置？（會覆蓋目前擺設）')){ seq=1; loadDefault(); selId=null; render(); }
+};
+document.getElementById('clearAll').onclick = ()=>{
+  if(confirm('確定清空全部家具？')){ items=[]; selId=null; render(); }
+};
+
+/* 匯出／匯入 */
+function exportData(){
+  return JSON.stringify({version:'a1-layout-1', unit:'cm', origin:'室內西南角，Y向北',
+    date:new Date().toISOString().slice(0,10), items:items.map(({id,...r})=>r)}, null, 1);
+}
+document.getElementById('exportBtn').onclick = ()=>{
+  const data = exportData();
+  document.getElementById('ioText').value = data;
+  const blob = new Blob([data], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'A1家具配置.json'; a.click();
+  toast('已下載 A1家具配置.json，傳給 Claude 即可');
+};
+document.getElementById('copyBtn').onclick = async ()=>{
+  const data = exportData();
+  document.getElementById('ioText').value = data;
+  try{ await navigator.clipboard.writeText(data); toast('已複製到剪貼簿'); }
+  catch(e){ toast('請手動全選下方文字複製'); }
+};
+document.getElementById('importBtn').onclick = ()=>document.getElementById('importFile').click();
+document.getElementById('importFile').onchange = ev=>{
+  const f = ev.target.files[0]; if(!f) return;
+  f.text().then(t=>doImport(t));
+};
+document.getElementById('pasteImport').onclick = ()=>doImport(document.getElementById('ioText').value);
+function doImport(t){
+  try{
+    const j = JSON.parse(t);
+    if(!j.items) throw 0;
+    seq = 1; items = j.items.map(r=>({id:seq++, rot:0, ...r}));
+    selId = null; render(); toast('匯入成功');
+  }catch(e){ toast('格式不對，匯入失敗'); }
+}
+
+load(); render(); fit();
+</script>
+</body>
+</html>
